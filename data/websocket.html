@@ -1,0 +1,35 @@
+<!doctype html>
+<html>
+  <body>
+    <script src="../node_modules/socket.io-client/socket.io.js"></script>
+    <script type="text/javascript">
+    var ws;
+    addon.port.on('connect', function(data){
+      ws = io.connect(data.url); // new WebSocket(data.url);
+      console.log('ws opened: ' + ws);
+
+      ws.on('error', function(event) {
+        console.log('err ' + event.message)
+        addon.port.emit('error', event);
+      });
+      ws.on('message', function(event) {
+        console.log('msg')
+          addon.port.emit('message', event.data);
+      });
+      ws.on('connect', function(event) {
+        console.log('open!')
+          addon.port.emit('open');
+      });
+
+    });
+    addon.port.on('update', function(data){
+      ws.emit('HubUpdate', data);
+      // post "heartbeat"
+    });
+    addon.port.on('disconnect', function(data){
+      ws.close();
+    });
+    addon.port.emit('loaded');
+    </script>
+  </body>
+</html>

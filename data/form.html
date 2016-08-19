@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head><title>URLPlayer</title></head>
+<body>
+<form>URL: <input type='url'><input type='button' value='navigate'></form>
+<p>Connect to Compatipede (Jannah master) by typing IP and port number:
+</p>
+<form>Master IP address: <input type='text' name="master_ip" value="192.168.1.7">:<input type="number" size="5" name="master_port" value="3000">  
+<br>Self: <input type='text' name="self_ip" value="192.168.1.3">:<input type="number" size="5" name="self_port" value="8000">
+	<input type='button' name='con' value='connect'></form>
+<script src="myPanelContent.js"></script>
+<script>
+window.onunload = function(){
+	//connection.sendChromeMessage({type:'disconnect'});
+};
+
+document.getElementsByName('con')[0].addEventListener('click', function(){
+	var prefs = {
+		host: document.getElementsByName("master_ip")[0].value,
+		port: document.getElementsByName("master_port")[0].value,
+  		self_host: document.getElementsByName("self_ip")[0].value, 
+  		self_port: document.getElementsByName("self_port")[0].value
+	};
+	prefs.type = 'jannahDetails';
+	connection.sendChromeMessage(prefs);
+}, false);
+
+
+</script>
+</body>
+</html>

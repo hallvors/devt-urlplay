@@ -1,0 +1,34 @@
+{
+  "manifest_version": 2,
+  "name": "devtools-urlplayer",
+  "applications": {
+    "gecko": {
+      "id": "devt-urlplayer@hallvord.com",
+      "strict_min_version": "42.0.0"
+    }
+  },
+  "version": "0.0.1",
+  "description": "Experiment playing URLs on device through debugger protocol, gathering information and screenshots",
+  "main": "index.js",
+  "author": "Hallvord R. M. Steen <hsteen@mozilla.com>",
+  "engines": {
+    "firefox": ">=38.0a1"
+  },
+  "icons": {
+    "48": "icons/millipede.svg"
+  },
+  "license": "MPL2",
+  "keywords": [
+    "jetpack"
+  ],
+  "permissions": [
+    "tabs",
+    "activeTab",
+    "<all_urls>"
+  ],
+  "browser_action": {
+    "default_icon": "icons/millipede.svg",
+    "default_title": "Start",
+    "default_popup": "popup/connect.html"
+  }
+}
