@@ -43,6 +43,10 @@ function setupTestContentServer(){
 				response.setHeader("Content-Type", "text/html; charset=utf8", false);
 				response.write("<!DOCTYPE html><html>\r\n<head><title>eval1</title></head>\r\n<body>Eval test file\r\n<script>var a='A'; function one(){return 1;}</script>\r\n</body>\r\n</html>");
 			});
+			srv.registerPathHandler("/test/video1", function(request, response) {
+				response.setHeader("Content-Type", "text/html; charset=utf8", false);
+				response.write("<!DOCTYPE html><html>\r\n<head><title>video 1</title></head>\r\n<body>Video test file\r\n<script>window.videojs={}</script><video id=\"myVid\" class=\"bigvideo\"><source type=\"video/x-foo-mime\" src=\"/video/anim.foo.foo\"><source type=\"video/x-bar-mime\" src=\"/video/anim.foo.bar\"></video>\r\n</body>\r\n</html>");
+			});
 		});
 	}
 }
