@@ -10,12 +10,17 @@ exports["test evaluate 2"] = function(assert, done) {
 			// We evaluate a number of things..
 			// Sorry about the callback hell..
 			var resp2 = new fakeResponseObj(assert, true, function(){
-				assert.deepEqual(this._json().result, {"foo":"bar"}, "Runtime error");
+				assert.strictEqual(this._json().result.message, "undefined is not a function", "Runtime error - message");
+				assert.strictEqual(this._json().result.kind, "Error", "Runtime error - kind");
+				assert.strictEqual(this._json().result.name, "TypeError", "Runtime error - name");
 				resp2 = new fakeResponseObj(assert, true, function(){
-					assert.deepEqual(this._json().result, [1,2,"a","b", {"aCap": "A"}], "Compile-time error");
+					assert.strictEqual(this._json().result.message, "expected expression, got end of script", "Compile error - message");
+					assert.strictEqual(this._json().result.kind, "Error", "Compile error - kind");
+					assert.strictEqual(this._json().result.name, "SyntaxError", "Compile error - name");
 					resp2 = new fakeResponseObj(assert, true, function(){
-						var expected = (new Array(10000)).join("a");
-						assert.strictEqual(this._json().result, expected, "Custom exception");
+						assert.strictEqual(this._json().result.message, "wot?", "Custom error - message");
+						assert.strictEqual(this._json().result.kind, "Exception", "Custom error - kind");
+						assert.strictEqual(this._json().result.name, "CustomException", "Custom error - name");
 						done();
 					});
 					panel.apishim.evaluate({script: "throw 'wot?'"}, resp2);
