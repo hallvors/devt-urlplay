@@ -165,7 +165,7 @@ UrlPlayerPanel.prototype.registerActor = function(response) {
 	    this.attachActor(tabs[selected]);
 	  });
 	});
-}
+};
 
 UrlPlayerPanel.prototype.attachActor = function(form) {
 	var self = this;
@@ -175,14 +175,14 @@ UrlPlayerPanel.prototype.attachActor = function(form) {
   		console.log("My actor attached");
   		//this.screenshotActor.takeScreenshot().then(function(response){console.log(response)});
 	});
-}
+};
 
 UrlPlayerPanel.prototype.jannahConnect = function(host, port, self_host, self_port){
 	//console.log('will connect to ws://' + host + ':' + port);
 	restServer.startServer("0.0.0.0", 8000, self_host);
 	// Jannah master keeps a list of hubs. 
 	var jc = jannahConnection.init({master_ip: host, master_port: port, ip:self_host,port:self_port,maxTabs:1,"location": ""}, self_host, self_port);
-}
+};
 
 
 var tooldef = {
